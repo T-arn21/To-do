@@ -1,7 +1,7 @@
 const taskForm = document.getElementById("taskForm");
 const taskList = document.getElementById("taskList");
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Retrieve tasks from localStorage or start with an empty array
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 // Weekly reset
 setInterval(() => {
@@ -13,7 +13,7 @@ setInterval(() => {
   });
   saveTasks();
   renderTasks();
-}, 7 * 24 * 60 * 60 * 1000); // Weekly reset interval
+}, 7 * 24 * 60 * 60 * 1000); 
 
 taskForm.addEventListener("submit", event => {
   event.preventDefault();
@@ -27,7 +27,7 @@ taskForm.addEventListener("submit", event => {
     completed: false,
   });
 
-  saveTasks(); // Save tasks to localStorage
+  saveTasks();
   taskForm.reset();
   renderTasks();
 });
@@ -44,6 +44,7 @@ function renderTasks() {
       <div>
         <button onclick="incrementProgress(${index})" ${task.completed ? "disabled" : ""}>+1</button>
         <button onclick="markComplete(${index})" ${task.completed ? "disabled" : ""}>Complete</button>
+        <button onclick="removeTask(${index})" style="background-color: #ff6b6b; color: #fff;">Remove</button>
       </div>
     `;
 
@@ -58,20 +59,25 @@ function incrementProgress(index) {
     if (task.progress >= task.target) {
       task.completed = true;
     }
-    saveTasks(); // Save updated progress
+    saveTasks(); 
     renderTasks();
   }
 }
 
 function markComplete(index) {
   tasks[index].completed = true;
-  saveTasks(); // Save updated completion status
+  saveTasks(); 
+  renderTasks();
+}
+
+function removeTask(index) {
+  tasks.splice(index, 1); 
+  saveTasks(); 
   renderTasks();
 }
 
 function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks)); // Save tasks to localStorage
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// Initial render when the page loads
 renderTasks();
