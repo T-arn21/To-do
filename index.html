@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #555;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .task-list {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .task {
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .task strong {
+      font-size: 18px;
+    }
+
+    .task.completed {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+    }
+
+    .task div {
+      margin-top: 10px;
+    }
+
+    .task button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    .task button:first-of-type {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .task button:first-of-type:hover {
+      background-color: #0056b3;
+    }
+
+    .task button:last-of-type {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .task button:last-of-type:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weekly To-Do List</h1>
+  <form id="taskForm">
+    <input type="text" id="taskName" placeholder="Task Name" required>
+    <input type="number" id="taskTarget" placeholder="Target (optional)">
+    <button type="submit">Add Task</button>
+  </form>
+
+  <div class="task-list" id="taskList">
+    <!-- Tasks will appear here -->
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
