@@ -1,7 +1,7 @@
 const taskForm = document.getElementById("taskForm");
 const taskList = document.getElementById("taskList");
 
-const tasks = []; // Array to store tasks
+let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Retrieve tasks from localStorage or start with an empty array
 
 // Weekly reset
 setInterval(() => {
@@ -11,6 +11,7 @@ setInterval(() => {
       task.completed = false;
     }
   });
+  saveTasks();
   renderTasks();
 }, 7 * 24 * 60 * 60 * 1000); // Weekly reset interval
 
@@ -26,6 +27,7 @@ taskForm.addEventListener("submit", event => {
     completed: false,
   });
 
+  saveTasks(); // Save tasks to localStorage
   taskForm.reset();
   renderTasks();
 });
@@ -56,11 +58,20 @@ function incrementProgress(index) {
     if (task.progress >= task.target) {
       task.completed = true;
     }
+    saveTasks(); // Save updated progress
     renderTasks();
   }
 }
 
 function markComplete(index) {
   tasks[index].completed = true;
+  saveTasks(); // Save updated completion status
   renderTasks();
 }
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks)); // Save tasks to localStorage
+}
+
+// Initial render when the page loads
+renderTasks();
